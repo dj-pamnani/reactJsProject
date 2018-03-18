@@ -1,0 +1,105 @@
+
+.heading{
+    text-align: center;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+    color: blueviolet;
+    background: lightcyan;
+    font-weight: bold;
+  }
+  
+  body {
+    font: 14px "Century Gothic", Futura, sans-serif;
+    margin: 20px;
+  }
+  
+  ol, ul {
+    padding-left: 30px;
+  }
+  
+  .board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  
+  .status {
+    margin-bottom: 10px;
+  }
+  
+  .square {
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 34px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 34px;
+  }
+  
+  .square:focus {
+    outline: none;
+  }
+  
+  .kbd-navigation .square:focus {
+    background: #ddd;
+  }
+  
+  .game {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .game-info {
+    margin-left: 20px;
+  }
+  .details-box{
+    width:40%;
+    height: 300px;
+    border: 3px solid blue;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 25px;
+  }
+  .user-tag{
+    padding: 15px;
+    
+  }
+  .name-text{
+      padding: 0;
+      height: 30px;
+      position: relative;
+      left: 0;
+      outline: none;
+      border: 1px solid darkgrey;
+      border-color: rgba(0,0,0,.15);
+      border-radius: 5px;
+      background-color: white;
+      font-size: 15px;
+  }
+  .submit{
+    padding: 10px;
+    width: 25%;
+    border:2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    background: white;
+    transition-duration: 0.3s;
+    color:black;
+  }
+  .submit:hover{
+    background:grey;
+    color: white;
+  }
+  .success-comp{
+    float: right;
+  }
+  

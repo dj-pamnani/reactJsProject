@@ -1,0 +1,22 @@
+.cTable{
+    display: table;
+    width: 80%;
+  }
+  .cTableRow{
+    display: table-row;
+  }
+  /* .cTableHead{
+    display: table-header-group;
+    background-color: lightblue;
+  } */
+  .cTableHead, .cTableCell{
+    display: table-cell;
+    padding: 15px;
+    border: 1px solid lightseagreen;
+  }
+  .cTableCell:hover{
+    background-color: lightsteelblue;
+    font-weight: bold;
+    color: darkturquoise;
+  }
+  
