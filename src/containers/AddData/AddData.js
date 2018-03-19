@@ -11,13 +11,14 @@ class AddUserData extends React.Component {
             {number:'2',name:'Prasad',phone:'9595095454',isAvailable:true,isEdit:false},
             {number:'3',name:'Bhawesh',phone:'8793398793',isAvailable:true,isEdit:false}
         ];
-        this.deleteUser = this.deleteUser.bind(this);
+        
         this.state={
             validUsers:this.userData,
             showEdit:false,
             userEdit:''
         }
-        
+        this.editUser = this.editUser.bind(this);
+        this.deleteUser = this.deleteUser.bind(this);
     }
     deleteUser=(dataToRemove)=>{
         console.log('tableData',dataToRemove);
@@ -27,6 +28,7 @@ class AddUserData extends React.Component {
             }
         });
         this.setState({
+            showEdit:false,
             validUsers:this.state.validUsers
         });
     }
@@ -36,6 +38,7 @@ class AddUserData extends React.Component {
             userEdit:userToEdit
         });
     }
+   
     // editedUserData=(data)=>{
     //     console.log('add data component----',data);
     //     return this.state.userEdit;
@@ -46,7 +49,7 @@ class AddUserData extends React.Component {
             if(valid.number==data.number){
                 valid.name=data.name;
                 valid.phone=data.phone;
-                valid.isAvailable=data.isAvailable;
+                // valid.isAvailable=data.isAvailable;
                 valid.isEdit=data.isEdit;
             }
         });
