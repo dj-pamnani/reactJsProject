@@ -19,4 +19,20 @@
     font-weight: bold;
     color: darkturquoise;
   }
+  .add-data{
+    padding: 7px;
+    width: 25%;
+    border:2px solid burlywood;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    background: white;
+    transition-duration: 0.3s;
+    color:black;
+  }
+  .add-data:hover{
+    background: steelblue;
+    color: white;
+    font-weight: bold;
+  }
   

@@ -7,11 +7,11 @@ class AddUserData extends React.Component {
     constructor(props) {
         super(props);
         this.userData=[
-            {number:'1',name:'Dipesh',phone:'9028407583',isAvailable:true,isEdit:false},
-            {number:'2',name:'Prasad',phone:'9595095454',isAvailable:true,isEdit:false},
-            {number:'3',name:'Bhawesh',phone:'8793398793',isAvailable:true,isEdit:false}
+            {number:1,name:'Dipesh',phone:'9028407583',isAvailable:true,isEdit:false},
+            {number:2,name:'Prasad',phone:'9595095454',isAvailable:true,isEdit:false},
+            {number:3,name:'Bhawesh',phone:'8793398793',isAvailable:true,isEdit:false}
         ];
-        
+        this.isAddUser = false;
         this.state={
             validUsers:this.userData,
             showEdit:false,
@@ -44,22 +44,39 @@ class AddUserData extends React.Component {
     //     return this.state.userEdit;
     // }
     updateData=(data)=>{
-        console.log('data-----------',data);
-        this.state.validUsers.map((valid)=>{
-            if(valid.number==data.number){
-                valid.name=data.name;
-                valid.phone=data.phone;
-                // valid.isAvailable=data.isAvailable;
-                valid.isEdit=data.isEdit;
-            }
-        });
+        console.log('isadduser-----------',this.isAddUser);
+        if(this.isAddUser){
+            this.state.validUsers.unshift(data);
+            this.isAddUser = false;
+        }
+        else{
+            this.state.validUsers.map((valid)=>{
+                if(valid.number==data.number){
+                    valid.name=data.name;
+                    valid.phone=data.phone;
+                    // valid.isAvailable=data.isAvailable;
+                    valid.isEdit=data.isEdit;
+                }
+            });
+        }
         this.setState({
             validUsers:this.state.validUsers
+        });
+    }
+    addUser=()=>{
+        this.isAddUser = true;
+        var userNumber = this.state.validUsers.length + 1;
+        console.log('length---',this.state.validUsers.length)
+        var user = {number:userNumber,name:'',phone:'',isAvailable:true,isEdit:false};
+        this.setState({
+            showEdit:true,
+            userEdit:user
         });
     }
     render() {
         return (
             <div>
+                <input type="button" className="add-data" onClick={this.addUser} value="Add Data"/>
                 <div className="cTable">
                     <div className="cTableRow">
                         <div className="cTableHead">Name</div>
