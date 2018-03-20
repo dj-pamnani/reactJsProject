@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Component1 from './comp1';
 import LoginPage from './containers/Login/Login';
-import AddDataComponent from './containers/AddData/AddData';
 // import { BrowserRouter } from 'react-router-dom';
 // import {Route} from 'react-router-dom';
 
@@ -114,7 +113,7 @@ class SuccessPage extends React.Component{
         { this.state.flag &&  <LoginPage getError = {this.getErrorData} userData={this.getUserData} flag = {this.setFlag} />} 
     {!this.state.flag  && <Component1 data = {this.state.userData} />  }
         {/* <Route path="/comp1" exact component={Component1} ></Route> */}
-        <AddDataComponent/>
+        
       </div>
     );
   }

@@ -18,7 +18,6 @@ class EditUser extends React.Component {
         this.props.editedUser.isEdit = false;
     }
     componentDidMount=()=>{
-        
         console.log("this.props.edit",this.props);
         var modal = document.getElementById('myModal');
         console.log('closepopup',this.closePopUp);

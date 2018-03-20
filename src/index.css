@@ -1,3 +1,7 @@
+.display-right{
+  float: right;
+  clear: both;
+}
 
 .heading{
     text-align: center;

@@ -7,9 +7,9 @@ class AddUserData extends React.Component {
     constructor(props) {
         super(props);
         this.userData=[
-            {number:1,name:'Dipesh',phone:'9028407583',isAvailable:true,isEdit:false},
-            {number:2,name:'Prasad',phone:'9595095454',isAvailable:true,isEdit:false},
-            {number:3,name:'Bhawesh',phone:'8793398793',isAvailable:true,isEdit:false}
+            {number:1,name:'Dipesh',phone:'9028407583',salary:25000,isAvailable:true,isEdit:false},
+            {number:2,name:'Prasad',phone:'9595095454',salary:30000,isAvailable:true,isEdit:false},
+            {number:3,name:'Bhawesh',phone:'8793398793',salary:35000,isAvailable:true,isEdit:false}
         ];
         this.isAddUser = false;
         this.state={
@@ -67,7 +67,7 @@ class AddUserData extends React.Component {
         this.isAddUser = true;
         var userNumber = this.state.validUsers.length + 1;
         console.log('length---',this.state.validUsers.length)
-        var user = {number:userNumber,name:'',phone:'',isAvailable:true,isEdit:false};
+        var user = {number:userNumber,name:'',phone:'',salary:'',isAvailable:true,isEdit:false};
         this.setState({
             showEdit:true,
             userEdit:user
@@ -81,6 +81,7 @@ class AddUserData extends React.Component {
                     <div className="cTableRow">
                         <div className="cTableHead">Name</div>
                         <div className="cTableHead">Phone</div>
+                        <div className="cTableHead">Salary</div>
                         <div className="cTableHead">Delete</div>
                         <div className="cTableHead">Edit User</div>
                     </div>
@@ -90,6 +91,12 @@ class AddUserData extends React.Component {
                     <div className="cTableRow" key={key}>
                         <div  className="cTableCell">{data.name}</div>
                         <div  className="cTableCell">{data.phone}</div>
+                        <div  className="cTableCell">{new Intl.NumberFormat('en-IN',{
+                                localeMatcher:'best fit',
+                                style:'currency',
+                                currency:'INR',
+                                currencyDisplay:'code'
+                            }).format(data.salary)}</div>
                         <div  className="cTableCell"><a href="#" value={data} onClick={()=>{this.deleteUser(data)}}>Delete</a></div>
                         <div  className="cTableCell"><a href="#" value={data} onClick={()=>{this.editUser(data)}}>Edit</a></div>
                         

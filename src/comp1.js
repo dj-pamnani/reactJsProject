@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import AddDataComponent from './containers/AddData/AddData';
 
 
 class Square extends React.Component {
@@ -16,9 +17,10 @@ class Square extends React.Component {
       {name:'US',state:[{stateName:'Florida',cityNames:['aa','ba','ca','da']},{stateName:'Maryland',cityNames:['as','bs','cs','ds']},{stateName:'New York',cityNames:['ad','bd','cd','dd']},{stateName:'Texas',cityNames:['af','bf','cf','df']},{stateName:'Washington',cityNames:['ag','bg','cg','dg']}]},
       {name:'England',state:[{stateName:'London',cityNames:['az','bz','cz','dz']},{stateName:'Somerset',cityNames:['ax','bx','cx','dx']},{stateName:'Lancashire',cityNames:['ac','bc','cc','dc']},{stateName:'Middlesex',cityNames:['av','bv','cv','dv']},{stateName:'Derbyshire',cityNames:['ab','bb','cb','db']}]}, 
   ];
-  var res = this.cityData.find((dt)=>{return dt.name=='India'});
-  console.log('res',res);
-  
+  // var res = this.cityData.find((dt)=>{return dt.name=='India'});
+  // console.log('res',res);
+  this.toDate = new Date();
+  console.log('date',this.toDate.toLocaleDateString());
   }
   handleCountryChange=(e)=>{
     this.setState({
@@ -39,11 +41,25 @@ class Square extends React.Component {
       city:e.currentTarget.value
     });
   }
+  makePayment=()=>{
+    console.log('make payment');
+  }
   render() {
     return (
   <div>
     <p>
       Hello {this.props.data.username}
+      <span className="display-right">{new Intl.DateTimeFormat('en-IN',{
+          year:'numeric',  //"2-digit"
+          month:'long',     // numeric, 2-digit, narrow, short
+          day:'numeric', //2-digit
+          hour:'2-digit',
+          minute:'2-digit',
+          hour12:false
+        }).format(this.toDate)}</span>
+    </p>
+    <p >
+        
     </p>
     <div>
       <input type="radio" name='country' value='India' id='India' onChange={this.handleCountryChange} defaultChecked/>India
@@ -70,6 +86,10 @@ class Square extends React.Component {
           return <option key={key} value={cty}>{cty}</option>
         })}
      </select> }
+    </div>
+    <AddDataComponent/>
+    <div>
+      <input type="button" value="Make Payment" className="submit" onClick={this.makePayment}/>
     </div>
   </div>
     );
