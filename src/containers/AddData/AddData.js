@@ -41,7 +41,7 @@ class AddUserData extends React.Component {
    
     // editedUserData=(data)=>{
     //     console.log('add data component----',data);
-    //     return this.state.userEdit;
+    //     return this.state.userEdit; dipesh
     // }
     updateData=(data)=>{
         console.log('isadduser-----------',this.isAddUser);
