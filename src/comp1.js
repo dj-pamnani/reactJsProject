@@ -10,8 +10,10 @@ class Square extends React.Component {
     this.state={
       country:'India',
       cState:'',
-      city:''
+      city:'',
+      time: {}, seconds: 60
     }
+    this.timer = 0;
     this.cityData = [
       {name:'India',state:[{stateName:'Maharashtra',cityNames:['a','b','c','d']},{stateName:'MP',cityNames:['ab','bb','cb','db']},{stateName:'UP',cityNames:['aq','bq','cq','dq']},{stateName:'Punjab',cityNames:['aw','bw','cw','dw']},{stateName:'Kerala',cityNames:['ae','be','ce','de']}]},
       {name:'US',state:[{stateName:'Florida',cityNames:['aa','ba','ca','da']},{stateName:'Maryland',cityNames:['as','bs','cs','ds']},{stateName:'New York',cityNames:['ad','bd','cd','dd']},{stateName:'Texas',cityNames:['af','bf','cf','df']},{stateName:'Washington',cityNames:['ag','bg','cg','dg']}]},
@@ -21,6 +23,8 @@ class Square extends React.Component {
   // console.log('res',res);
   this.toDate = new Date();
   console.log('date',this.toDate.toLocaleDateString());
+  this.makePayment = this.makePayment.bind(this);
+  this.countDown = this.countDown.bind(this);
   }
   handleCountryChange=(e)=>{
     this.setState({
@@ -41,14 +45,46 @@ class Square extends React.Component {
       city:e.currentTarget.value
     });
   }
+  secondsToTime(secs){
+    let hours = Math.floor(secs / (60 * 60));
+
+    let divisor_for_minutes = secs % (60 * 60);
+    let minutes = Math.floor(divisor_for_minutes / 60);
+
+    let divisor_for_seconds = divisor_for_minutes % 60;
+    let seconds = Math.ceil(divisor_for_seconds);
+
+    let obj = {
+      "h": hours,
+      "m": minutes,
+      "s": seconds
+    };
+    return obj;
+  }
+  countDown() {
+    // Remove one second, set state so a re-render happens.
+    let seconds = this.state.seconds - 1;
+    this.setState({
+      time: this.secondsToTime(seconds),
+      seconds: seconds,
+    });
+    
+    // Check if we're at zero.
+    if (seconds == 0) { 
+      clearInterval(this.timer);
+    }
+  }
   makePayment=()=>{
     console.log('make payment');
+    if (this.timer == 0) {
+      this.timer = setInterval(this.countDown, 1000);
+    }
   }
   render() {
     return (
   <div>
     <p>
-      Hello {this.props.data.username}
+      Hello  { this.props.data? this.props.data.username:''}
       <span className="display-right">{new Intl.DateTimeFormat('en-IN',{
           year:'numeric',  //"2-digit"
           month:'long',     // numeric, 2-digit, narrow, short
@@ -90,6 +126,7 @@ class Square extends React.Component {
     <AddDataComponent/>
     <div>
       <input type="button" value="Make Payment" className="submit" onClick={this.makePayment}/>
+      m: {this.state.time.m} s: {this.state.time.s}
     </div>
   </div>
     );

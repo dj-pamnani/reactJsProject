@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Component1 from './comp1';
 import LoginPage from './containers/Login/Login';
-// import { BrowserRouter } from 'react-router-dom';
-// import {Route} from 'react-router-dom';
+import { BrowserRouter, Link } from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 class Square extends React.Component {
   render() {
@@ -119,12 +119,12 @@ class SuccessPage extends React.Component{
   }
 }
 ReactDOM.render(
-//   <BrowserRouter >
-  <div>
+  <BrowserRouter >
+  {/* <div> */}
   <SuccessPage/>
   
-   {/* <Game />, */}
-  </div>,
-//   </BrowserRouter >,
+    {/* <Game />,  */}
+  {/* </div>, */}
+  </BrowserRouter >,
   document.getElementById('root')
 );

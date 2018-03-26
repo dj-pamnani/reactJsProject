@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './AddData.css';
 import EditUser from '../EditUser/EditUser';
+import Pagination from '../Pagination/Pagination';
+import {Route, Link} from 'react-router-dom';
 
 class AddUserData extends React.Component {
     constructor(props) {
@@ -105,6 +107,11 @@ class AddUserData extends React.Component {
                   })}  
                 </div>
                 {this.state.showEdit && <EditUser editedUser={this.state.userEdit} updateUser={this.updateData} edit={true}/>}
+                
+                <button value="Routing will start">
+                    <Link to='/pagination'>Redirect for Pagination Example</Link>
+                </button>
+                <Route path="/pagination" exact component={Pagination} ></Route>
             </div>
         );
     }
