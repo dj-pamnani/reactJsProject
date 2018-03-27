@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../AddData/AddData.css';
+import './pagination.css';
 class Pagination extends React.Component{
     constructor(props){
         super(props);
@@ -29,33 +30,50 @@ class Pagination extends React.Component{
             currentUsers:''
         };
         this.handlePageNumber = this.handlePageNumber.bind(this);
-        this.handlePageNumber();
+        // this.handlePageNumber();
+        const lastIndex = this.state.currentPage * this.state.userPerPage;
+        const firstIndex = lastIndex - this.state.userPerPage;
+        this.current = this.state.users.slice(firstIndex,lastIndex);
+    }
+    componentWillMount=()=>{
         
+        this.pageNumbers = [];
+        for(let i=1;i<=Math.ceil(this.state.users.length/this.state.userPerPage);i++){
+            this.pageNumbers.push(i);
+        }
+
+        console.log('page numbers',this.state.users.length/this.state.userPerPage);
     }
     componentDidMount=()=>{
-        console.log('componentttttttttttt');
+        // this.handlePageNumber();
+        console.log('componentttttttttttt');  
         
     }
     handlePageNumber=(event)=>{
-        
-        const lastIndex = this.state.currentPage * this.state.userPerPage;
-        const firstIndex = lastIndex - this.state.userPerPage;
-        const current = this.state.users.slice(firstIndex,lastIndex);
+        console.log('event.target.id',event? event.target.id:'');
         this.setState({
-            currentUsers:current,
-            currentPage:event? Number(event.target.id) :''
+            currentPage:Number(event.target.id)
         });
-        console.log('handle page numbers',this.state);
+        console.log('state in handle',this.state);
+        
+        
     }
     render(){
-        const pageNumbers = [];
-        for(let i=1;i<Math.ceil(this.state.users.length/this.state.userPerPage);i++){
-            pageNumbers.push(i);
-        }
+        console.log('handle page numbers',this.state);
+        const lastIndex = this.state.currentPage * this.state.userPerPage;
+        const firstIndex = lastIndex - this.state.userPerPage;
+        this.current = this.state.users.slice(firstIndex,lastIndex);
+        // this.setState({
+        //     currentUsers:current,
+        // });
+        
         return(
         <div>
             <div className='cTable'>
                 <div className='cTableRow'>
+                    {/* <div className='cTableHead'>
+                        No.
+                    </div> */}
                     <div className='cTableHead'>
                         Name
                     </div>
@@ -63,9 +81,10 @@ class Pagination extends React.Component{
                         Emp Id
                     </div>
                 </div>
-                    {this.state.currentUsers.map((user,index)=>{
+                    {this.current.map((user,index)=>{
                         return(
                             <div className='cTableRow' key={index}>
+                                {/* <div className='cTableCell'>{index}</div> */}
                                 <div className='cTableCell'>{user.name}</div>
                                 <div className='cTableCell'>{user.empId}</div>
                             </div>
@@ -74,7 +93,7 @@ class Pagination extends React.Component{
             </div>
             <div>
                 <ul id="page-numbers">
-                    {pageNumbers.map(number =>{
+                    {this.pageNumbers.map(number =>{
                         return(
                             <li key={number} id={number} onClick={this.handlePageNumber}>
                                 {number}
