@@ -27,7 +27,8 @@ class Pagination extends React.Component{
             users: pagUsers,
             currentPage:1,
             userPerPage:4,
-            currentUsers:''
+            currentUsers:'',
+            prev:true
         };
         this.handlePageNumber = this.handlePageNumber.bind(this);
         // this.handlePageNumber();
@@ -46,8 +47,7 @@ class Pagination extends React.Component{
     }
     componentDidMount=()=>{
         // this.handlePageNumber();
-        console.log('componentttttttttttt');  
-        
+        console.log('componentttttttttttt'); 
     }
     handlePageNumber=(event)=>{
         console.log('event.target.id',event? event.target.id:'');
@@ -55,8 +55,27 @@ class Pagination extends React.Component{
             currentPage:Number(event.target.id)
         });
         console.log('state in handle',this.state);
+        if(this.state.currentPage>1){
+            this.setState({
+                prev:false
+            });
+        }
+        else if(this.state.currentPage<=1){
+            this.setState({
+                prev:true
+            });
+        }
         
-        
+    }
+    onPrevClick=()=>{
+        this.setState({
+            currentPage:this.state.currentPage-1
+        })
+    }
+    onNextClick=()=>{
+        this.setState({
+            currentPage:this.state.currentPage+1
+        })
     }
     render(){
         console.log('handle page numbers',this.state);
@@ -93,6 +112,9 @@ class Pagination extends React.Component{
             </div>
             <div>
                 <ul id="page-numbers">
+                    <li onClick={this.onPrevClick} value={this.state.prev} className={this.state.prev? 'disabled':''}>
+                        Prev
+                    </li>
                     {this.pageNumbers.map(number =>{
                         return(
                             <li key={number} id={number} onClick={this.handlePageNumber}>
@@ -100,6 +122,9 @@ class Pagination extends React.Component{
                             </li>
                         )
                     } )}
+                    <li onClick={this.onNextClick}>
+                        Next
+                    </li>
                 </ul>
             </div>
         </div>
